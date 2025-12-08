@@ -8,9 +8,14 @@ venv/
 __pycache__/
 *.pyc
 
-# Large raw data (optional but recommended for GitHub)
-data/raw/videos/
-data/raw/channels/
+# Raw data
+data/raw/
+
+# Staging Parquet files
+data/staging/
+
+# Warehouse Parquet files
+data/warehouse/
 
 # OS files
 .DS_Store
