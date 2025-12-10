@@ -1,101 +1,106 @@
-# YouTube Data Engineering & Analytics Pipeline
+**YouTube Data Engineering Pipeline**
 
-This project is an end to end data engineering and analytics pipeline built using the YouTube Data API. The goal of this project is to ingest, process, store, and analyze YouTube channel and video data at scale.
+**Title**
+A complete end to end data pipeline that ingests multi channel YouTube data, builds a structured data lake, transforms JSON to Parquet, constructs a star schema warehouse, and enables analytics using DuckDB SQL
 
- **Day 1 Status: Raw Data Ingestion Completed**
+**Architecture Diagram**
 
----
+<img width="1092" height="3936" alt="image" src="https://github.com/user-attachments/assets/c7aa7a5f-19dc-4252-aad0-03b2af41d70e" />
 
-## Project Goals
+**Features**
 
-- Build a fully automated YouTube data pipeline
-- Store raw API data in a structured data lake format
-- Create a scalable data warehouse for analytics
-- Perform time series and engagement analysis
-- Build an interactive analytics dashboard
+1)Automated ingestion of YouTube channel + video metadata
 
----
+2)Historical raw data stored with date partitions
 
-## Tech Stack
+3)Data transformation from nested JSON into clean analytical tables
 
-- Python
-- YouTube Data API v3
-- Google API Python Client
-- SQL (PostgreSQL planned)
-- Pandas (upcoming)
-- Apache Airflow (planned)
-- Power BI / Tableau / Streamlit (planned)
+4)Warehouse modeled with dimensions and fact tables
 
----
+5)Parquet optimized storage
 
-## Pipeline Architecture (Current Stage)
+6)SQL analytics with DuckDB
 
-YouTube API  
-→ Python Extraction Scripts  
-→ Raw JSON Storage (Data Lake)
+7)Modular and scalable codebase
 
----
+**Data Pipeline Flow**
 
-## Tracked YouTube Channels
+**Extraction**
 
-The project currently tracks the following channels:
+Fetches channel metadata
 
-- Google Developers  
-- freeCodeCamp  
-- Fireship  
-- Lex Fridman  
-- CNBC  
+Fetches video metadata
 
-These channels were selected to allow cross-domain analysis across:
-- Education
-- Software Development
-- AI
-- Podcasts
-- Business News
+Saves raw JSON to data/raw/run_date=YYYY-MM-DD
 
----
+**Transformation**
 
-## Day 1: Raw Data Ingestion
+Normalizes nested JSON
 
-### What Was Implemented
+Parses ISO8601 durations
 
-- Secure API authentication using environment variables
-- Multi-channel YouTube data extraction
-- Channel metadata ingestion
-- Full historical video metadata ingestion
-- Batch-based API fetching to stay within quota limits
-- Raw data stored in partitioned data lake structure
+Produces staging Parquet tables
 
----
+**Warehouse**
 
-## Raw Data Storage Structure
+Star schema design
 
-```text
-data/
-└── raw/
-    ├── channels/
-    │   └── run_date=YYYY-MM-DD/
-    │       └── channels.json
-    └── videos/
-        └── run_date=YYYY-MM-DD/
-            └── videos.json
+Dimension tables: dim_channel, dim_video
 
-**How to Run the Day 1 Pipeline**
-1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/youtube-data-pipeline.git
+Fact tables: fct_channel_daily_stats, fct_video_daily_stats
+
+Stored in data/warehouse/ as Parquet
+
+**Analytics**
+
+DuckDB SQL queries
+
+Growth analysis
+
+Top videos
+
+Upload strategy insights
+
+**Setup instructions**
+
+git clone <repo>
 cd youtube-data-pipeline
 
-2. Create and activate virtual environment
 python -m venv venv
 venv\Scripts\activate
 
-3. Install dependencies
-pip install google-api-python-client python-dotenv
+pip install -r requirements.txt
 
-4. Add YouTube API Key
-Create a .env file in the root directory:
-YT_API_KEY=YOUR_API_KEY_HERE
+**Add your YouTube API Key:**
 
-5. Run the pipeline
+Create .env:
+
+YT_API_KEY=YOUR_API_KEY
+
+**Running the Pipeline**
+
+**Run Full Pipeline**
 python src/main.py
 
+**Run Analytics**
+
+python src/analysis_run.py
+
+**Generate BI CSVs**
+
+python src/create_bi_csvs.py
+
+**Future Enhancements**
+
+Deploy pipeline to AWS (S3 + Glue + Athena)
+
+Add Airflow orchestration
+
+Add monitoring & logging
+
+Build BI dashboard (Tableau, Power BI, or Streamlit)
+
+**Contact**
+
+Author: Aditya Kinikar
+Feel free to reach out on GitHub or LinkedIn.
