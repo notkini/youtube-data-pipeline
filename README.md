@@ -3,6 +3,9 @@
 **Title**
 A complete end to end data pipeline that ingests multi channel YouTube data, builds a structured data lake, transforms JSON to Parquet, constructs a star schema warehouse, and enables analytics using DuckDB SQL
 
+
+
+
 **Architecture Diagram**
 
 <img width="1092" height="3936" alt="image" src="https://github.com/user-attachments/assets/c7aa7a5f-19dc-4252-aad0-03b2af41d70e" />
